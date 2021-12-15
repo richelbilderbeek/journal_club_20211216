@@ -144,12 +144,19 @@ This shows GCAE encodes LD. Unsure if it is important that these
 lines match, as the NN can probably account for it in other
 laters.
 
-## Equations
+### Figure S3
 
+![](ausmees_and_nettelblad_supmat_fig_3d.png)
+
+UMAP can perform reasonably well.
+
+## Equations
 
 ### Equation 0
 
 ![Ausmees and Nettelblad equation 0](ausmees_and_nettelblad_eq_0.png)
+
+one-hot encoding: a neuron has one input per state, in this case 3
 
 f(0) = frequency of zero markers, homozygous for major allele
 f(1) = frequency of one marker, heterozygous
