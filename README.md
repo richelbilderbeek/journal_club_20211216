@@ -75,11 +75,36 @@ Figure 2 shows the architecture of the autoencoder:
 
 ![Ausmees and Nettelblad figure 2](ausmees_and_nettelblad_fig_2.jpg)
 
+> Architecture of the GCAE model used for dimensionality reduction. 
+> The encoder transforms data to a lower-dimensional latent representation 
+> through a series of convolutional, pooling and fully-connected layers. 
+> The decoder reconstructs the input genotypes. The input consists of three layers: 
+> genotype data (gray), a binary mask representing missing data (blue), 
+> and a marker-specific trainable variable per SNP (red). 
+> The red dashed line indicates where this marker-specific variable 
+> is concatenated to a layer in the decoder. 
+> Another marker-specific trainable variable, shown in green, 
+> is also concatenated to the second-last layer in the decoder. 
+> Black dashed lines indicate residual connections, 
+> where the output of a layer is added to that of another layer later in the network. 
+> The numbers below the layers indicate the number of kernels for convolutional layers, 
+> down- or upsampling factor for pooling and upsampling layers, 
+> and number of units for fully-connected layers.
+> The displayed numbers are those of the final model used 
+> to obtain the presented results for dimensionality reduction to 2 dimensions. 
+> For other numbers of dimensions, the only modification made was to change 
+> the number of units in the latent representation from 2 to 4, 6, 8 or 10. 
+> For the genetic clustering application, the number of units in the latent 
+> representation was k = 5 .
+
  * Encoder:
  * Decoder:
- * Red bar:
+ * Grey bar: genotype data
+ * Red bar: marker-specific trainable variable per SNP
  * Blue bar: A dimension representing missing and non-missing genotypes, with the values 0 and 1, respectively, is added to the input data
- * Line from red bar to decoder layer:
+ * Green bar: another marker-specific trainable variable
+ * Line from red bar to decoder layer: indicates where the marker-specific variable 
+   is concatenated to a layer in the decoder
  * Lines from conv to maxpool layers:
 
 ### Figure 3
