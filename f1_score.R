@@ -10,7 +10,8 @@ ggplot2::ggplot(
   ggplot2::aes(x = score, y = 0, color = as.factor(is_spam))
 ) + ggplot2::geom_point(size = 5) +
   ggplot2::labs(colour = "is_spam") +
-  ggplot2::xlab("Score (i.e. the estimated probability this is spam)") +
+  ggplot2::scale_color_manual(values = c("TRUE" = "black", "FALSE" = "grey")) +
+  ggplot2::xlab("Classification score") +
   ggplot2::geom_vline(xintercept = threshold, lty = "dashed") +
   ggplot2::theme(
     axis.title.y = ggplot2::element_blank(),
@@ -18,6 +19,7 @@ ggplot2::ggplot(
     axis.ticks.y = ggplot2::element_blank(),
     text = ggplot2::element_text(size = 24)
   )
+ggplot2::ggsave(filename = "~/classification.png", width = 9, height = 2)
 
 
 count_fp <- function(classifications, threshold) {
@@ -51,31 +53,101 @@ calc_precision(classifications, threshold)
 calc_recall(classifications, threshold)
 calc_f1_score(classifications, threshold)
 
-f1_scores <- tibble::tibble(
+scores <- tibble::tibble(
   threshold = classifications$score - (0.5 / length(classifications$score)),
+  precision = NA,
+  recall = NA,
   f1_score = NA
 )
-f1_scores <- f1_scores[-1, ]
+scores <- scores[-1, ]
+
 # library(functional)
 # calc_f1_score_for_classifications <- functional::Curry(calc_f1_score, classifications = classifications)
 # functional::
-# calc_f1_scores_for_classifications <- Vectorize(calc_f1_score_for_classifications)
-# calc_f1_scores_for_classifications(c(0.1, 0.2))
-for (row_index in seq_along(f1_scores$threshold)) {
-  f1_scores$f1_score[row_index] <- calc_f1_score(
+# calc_scores_for_classifications <- Vectorize(calc_f1_score_for_classifications)
+# calc_scores_for_classifications(c(0.1, 0.2))
+for (row_index in seq_along(scores$threshold)) {
+  scores$precision[row_index] <- calc_precision(
     classifications = classifications,
-    threshold = f1_scores$threshold[row_index]
+    threshold = scores$threshold[row_index]
+  )
+  scores$recall[row_index] <- calc_recall(
+    classifications = classifications,
+    threshold = scores$threshold[row_index]
+  )
+  scores$f1_score[row_index] <- calc_f1_score(
+    classifications = classifications,
+    threshold = scores$threshold[row_index]
   )
 }
-f1_scores
+scores
 
 ggplot2::ggplot(
 ) + ggplot2::geom_point(
   data = classifications,
-  ggplot2::aes(x = score, y = mean(f1_scores$f1_score), color = as.factor(is_spam)),
+  ggplot2::aes(x = score, y = 0.0, color = as.factor(is_spam)),
   size = 5
-) + ggplot2::geom_point(data = f1_scores, ggplot2::aes(x = threshold, y = f1_score), size = 5) +
+) +
+  ggplot2::geom_point(data = scores, ggplot2::aes(x = threshold, y = precision), size = 5, color = "red") +
+  ggplot2::geom_smooth(data = scores, ggplot2::aes(x = threshold, y = precision), color = "red") +
   ggplot2::labs(colour = "is_spam") +
+  ggplot2::scale_color_manual(values = c("TRUE" = "black", "FALSE" = "grey")) +
+  ggplot2::ylab("Precision") +
+  ggplot2::xlab("Classification score") +
+  ggplot2::theme(text = ggplot2::element_text(size = 24))
+ggplot2::ggsave(filename = "~/precision.png", width = 9, height = 9)
+
+ggplot2::ggplot(
+) + ggplot2::geom_point(
+  data = classifications,
+  ggplot2::aes(x = score, y = 0.0, color = as.factor(is_spam)),
+  size = 5
+) +
+  ggplot2::geom_point(data = scores, ggplot2::aes(x = threshold, y = recall), size = 5, col = "green") +
+  ggplot2::geom_smooth(data = scores, ggplot2::aes(x = threshold, y = recall), col = "green") +
+  ggplot2::labs(colour = "is_spam") +
+  ggplot2::scale_color_manual(values = c("TRUE" = "black", "FALSE" = "grey")) +
+  ggplot2::ylab("Recall") +
+  ggplot2::xlab("Classification score") +
+  ggplot2::theme(text = ggplot2::element_text(size = 24))
+ggplot2::ggsave(filename = "~/recall.png", width = 9, height = 9)
+
+ggplot2::ggplot(
+) + ggplot2::geom_point(
+  data = classifications,
+  ggplot2::aes(x = score, y = 0.0, color = as.factor(is_spam)),
+  size = 5
+) +
+  ggplot2::geom_point(data = scores, ggplot2::aes(x = threshold, y = f1_score), size = 5, color = "blue") +
+  ggplot2::geom_smooth(data = scores, ggplot2::aes(x = threshold, y = f1_score), color = "blue") +
+  ggplot2::labs(colour = "is_spam") +
+  ggplot2::scale_color_manual(values = c("TRUE" = "black", "FALSE" = "grey")) +
   ggplot2::ylab("F1 score") +
-  ggplot2::xlab("Classification score (for data), threshold (for F1 score)")
+  ggplot2::xlab("Classification score") +
+  ggplot2::theme(text = ggplot2::element_text(size = 24))
+ggplot2::ggsave(filename = "~/f1_score.png", width = 9, height = 9)
+
+
+ggplot2::ggplot(
+) + ggplot2::geom_point(
+  data = classifications,
+  ggplot2::aes(x = score, y = 0.0, color = as.factor(is_spam)),
+  size = 5
+) +
+  ggplot2::geom_point(data = scores, ggplot2::aes(x = threshold, y = precision), size = 5, color = "red") +
+  ggplot2::geom_smooth(data = scores, ggplot2::aes(x = threshold, y = precision), color = "red") +
+  ggplot2::geom_point(data = scores, ggplot2::aes(x = threshold, y = recall), size = 5, color = "green") +
+  ggplot2::geom_smooth(data = scores, ggplot2::aes(x = threshold, y = recall), color = "green") +
+  ggplot2::geom_point(data = scores, ggplot2::aes(x = threshold, y = f1_score), size = 5, color = "blue") +
+  ggplot2::geom_smooth(data = scores, ggplot2::aes(x = threshold, y = f1_score), color = "blue") +
+  ggplot2::labs(colour = "is_spam") +
+  ggplot2::scale_color_manual(values = c("TRUE" = "black", "FALSE" = "grey")) +
+  ggplot2::ylab("F1 score") +
+  ggplot2::xlab("Classification score") +
+  ggplot2::theme(text = ggplot2::element_text(size = 24))
+ggplot2::ggsave(filename = "~/f1_score.png", width = 9, height = 9)
+
+
+
+
 
