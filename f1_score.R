@@ -2,23 +2,23 @@ classifications <- tibble::tibble(
   score = seq(from = 0.0, to = 1.0, length = 30),
   is_spam = c(rep(FALSE, 15), rep(c(TRUE, FALSE), 4), rep(TRUE, 7))
 )
-threshold <- 0.67
 threshold <- 0.75
+threshold <- 0.67
 
 ggplot2::ggplot(
   classifications,
   ggplot2::aes(x = score, y = 0, color = as.factor(is_spam))
-) + ggplot2::geom_point(size = 5) + 
+) + ggplot2::geom_point(size = 5) +
   ggplot2::labs(colour = "is_spam") +
   ggplot2::xlab("Score (i.e. the estimated probability this is spam)") +
   ggplot2::geom_vline(xintercept = threshold, lty = "dashed") +
   ggplot2::theme(
-    axis.title.y = ggplot2::element_blank(), 
+    axis.title.y = ggplot2::element_blank(),
     axis.text.y = ggplot2::element_blank(),
     axis.ticks.y = ggplot2::element_blank(),
     text = ggplot2::element_text(size = 24)
   )
-  
+
 
 count_fp <- function(classifications, threshold) {
   sum(classifications$is_spam[classifications$score >= threshold] == FALSE)
@@ -63,7 +63,7 @@ f1_scores <- f1_scores[-1, ]
 # calc_f1_scores_for_classifications(c(0.1, 0.2))
 for (row_index in seq_along(f1_scores$threshold)) {
   f1_scores$f1_score[row_index] <- calc_f1_score(
-    classifications = classifications, 
+    classifications = classifications,
     threshold = f1_scores$threshold[row_index]
   )
 }
@@ -71,11 +71,11 @@ f1_scores
 
 ggplot2::ggplot(
 ) + ggplot2::geom_point(
-  data = classifications, 
+  data = classifications,
   ggplot2::aes(x = score, y = mean(f1_scores$f1_score), color = as.factor(is_spam)),
   size = 5
-) + ggplot2::geom_point(data = f1_scores, ggplot2::aes(x = threshold, y = f1_score), size = 5) + 
+) + ggplot2::geom_point(data = f1_scores, ggplot2::aes(x = threshold, y = f1_score), size = 5) +
   ggplot2::labs(colour = "is_spam") +
   ggplot2::ylab("F1 score") +
   ggplot2::xlab("Classification score (for data), threshold (for F1 score)")
-  
+
