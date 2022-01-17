@@ -32,15 +32,15 @@ p + ggplot2::geom_smooth(method = "lm", color = "red", se = FALSE, size = 10) +
 
 # Underfit
 p + ggplot2::geom_smooth(method = "lm", color = "red", se = FALSE, size = 10) +
-  ggplot2::geom_point(size = 10)
-ggplot2::ggsave("~/underfitting.png", width = 7, height = 7)
+  ggplot2::geom_point(size = 20)
+ggplot2::ggsave("~/underfitting.png", width = 4, height = 4)
 
 # Correct fit
 p + ggplot2::geom_smooth(method = "lm", formula = y ~ x + I(x^2), color = "green", se = FALSE, size = 10) +
-  ggplot2::geom_point(size = 10)
-ggplot2::ggsave("~/correct_fit.png", width = 7, height = 7)
+  ggplot2::geom_point(size = 20)
+ggplot2::ggsave("~/correct_fit.png", width = 4, height = 4)
 
 # Overfit
 p + ggplot2::geom_smooth(method = "loess", color = "blue", se = FALSE, size = 10) +
-  ggplot2::geom_point(size = 10)
-ggplot2::ggsave("~/overfitting.png", width = 7, height = 7)
+  ggplot2::geom_point(size = 20)
+ggplot2::ggsave("~/overfitting.png", width = 4, height = 4)
