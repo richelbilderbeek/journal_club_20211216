@@ -234,7 +234,3 @@ F1 score:
 
  * [Schölkopf et al., 1998] Schölkopf, Bernhard, Alexander Smola, and Klaus-Robert Müller. "Nonlinear component analysis as a kernel eigenvalue problem." Neural computation 10.5 (1998): 1299-1319.
 
-
- * [this_internal_link_does_not_exist.md](this_link_does_not_exist.md)
- * [this_external_link_does_not_exist.md](https://www.hoididoi.nl/)
-
