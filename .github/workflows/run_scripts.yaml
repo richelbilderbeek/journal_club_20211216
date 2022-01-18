@@ -4,10 +4,10 @@ on:
   schedule:
   - cron: "0 0 1 * *"
 
-name: run_script
+name: run_scripts
 
 jobs:
-  run_script:
+  run_scripts:
     runs-on: ubuntu-latest
     
     env:
