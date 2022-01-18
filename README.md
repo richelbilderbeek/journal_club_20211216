@@ -1,5 +1,10 @@
 # journal_club_20211216
 
+Branch   |[![GitHub Actions logo](man/figures/GitHubActions.png)](https://github.com/richelbilderbeek/journal_club_20211216/actions)|[![GitHub Actions logo](man/figures/GitHubActions.png)](https://github.com/richelbilderbeek/journal_club_20211216/actions)
+---------|--------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------
+`master` |![run_scripts](https://github.com/richelbilderbeek/journal_club_20211216/workflows/run_scripts/badge.svg?branch=master)   |![check_links](https://github.com/richelbilderbeek/journal_club_20211216/workflows/check_links/badge.svg?branch=master)   
+`develop`|![run_scripts](https://github.com/richelbilderbeek/journal_club_20211216/workflows/run_scripts/badge.svg?branch=develop)  |![check_links](https://github.com/richelbilderbeek/journal_club_20211216/workflows/check_links/badge.svg?branch=develop)
+
 My Journal Club presentation on Dec 16th 2021
 
 ## Presentation sketch
