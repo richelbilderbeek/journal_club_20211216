@@ -28,9 +28,12 @@ jobs:
       - name: Run f1_score.R
         run: Rscript f1_score.R
 
+      - name: Zip results
+        run: zip pictures.zip *.png
+
       - name: Upload table to the workflow tab
         uses: actions/upload-artifact@v2
         with:
           name: pictures
-          path: *.png
+          path: zip pictures.zip
 
