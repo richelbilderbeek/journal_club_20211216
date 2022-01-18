@@ -14,6 +14,11 @@ jobs:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - uses: actions/checkout@v2
-      - uses: LeandroLS/linksnitch@main
+
+#      - uses: LeandroLS/linksnitch@main
+#        with:
+#          allowedStatusCodes: '[200, 201]'
+
+      - uses: lycheeverse/lychee-action@v1.2.0
         with:
-          allowedStatusCodes: '[200, 201]'
+          fail: true
