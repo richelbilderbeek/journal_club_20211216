@@ -35,5 +35,5 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: pictures
-          path: zip pictures.zip
+          path: pictures.zip
 
