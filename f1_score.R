@@ -19,7 +19,7 @@ ggplot2::ggplot(
     axis.ticks.y = ggplot2::element_blank(),
     text = ggplot2::element_text(size = 24)
   )
-ggplot2::ggsave(filename = "~/classification.png", width = 9, height = 2)
+ggplot2::ggsave(filename = "classification.png", width = 9, height = 2)
 
 
 count_fp <- function(classifications, threshold) {
@@ -95,7 +95,7 @@ ggplot2::ggplot(
   ggplot2::ylab("Precision") +
   ggplot2::xlab("Classification score") +
   ggplot2::theme(text = ggplot2::element_text(size = 24))
-ggplot2::ggsave(filename = "~/precision.png", width = 9, height = 9)
+ggplot2::ggsave(filename = "precision.png", width = 9, height = 9)
 
 ggplot2::ggplot(
 ) + ggplot2::geom_point(
@@ -110,7 +110,7 @@ ggplot2::ggplot(
   ggplot2::ylab("Recall") +
   ggplot2::xlab("Classification score") +
   ggplot2::theme(text = ggplot2::element_text(size = 24))
-ggplot2::ggsave(filename = "~/recall.png", width = 9, height = 9)
+ggplot2::ggsave(filename = "recall.png", width = 9, height = 9)
 
 ggplot2::ggplot(
 ) + ggplot2::geom_point(
@@ -125,7 +125,7 @@ ggplot2::ggplot(
   ggplot2::ylab("F1 score") +
   ggplot2::xlab("Classification score") +
   ggplot2::theme(text = ggplot2::element_text(size = 24))
-ggplot2::ggsave(filename = "~/f1_score.png", width = 9, height = 9)
+ggplot2::ggsave(filename = "f1_score.png", width = 9, height = 9)
 
 
 ggplot2::ggplot(
@@ -145,7 +145,7 @@ ggplot2::ggplot(
   ggplot2::ylab("F1 score") +
   ggplot2::xlab("Classification score") +
   ggplot2::theme(text = ggplot2::element_text(size = 24))
-ggplot2::ggsave(filename = "~/f1_score.png", width = 9, height = 9)
+ggplot2::ggsave(filename = "f1_score.png", width = 9, height = 9)
 
 
 
